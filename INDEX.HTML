@@ -2,73 +2,35 @@
 <html>
 <head>
     <title>Login Form Validation</title>
-    <style>
-        body {
-            font-family: Arial;
+
+    <script>
+        function validateForm() {
+            var name = document.forms["myForm"]["name"].value;
+            var password = document.forms["myForm"]["password"].value;
+
+            if (name == "") {
+                alert("Name must be filled out");
+                return false;
+            }
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters");
+                return false;
+            }
+
+            return true;
         }
-        .error {
-            color: red;
-            font-size: 14px;
-        }
-        .success {
-            color: green;
-        }
-        input {
-            margin-bottom: 5px;
-            padding: 5px;
-        }
-    </style>
+    </script>
 </head>
+
 <body>
+    <h2>Registration Form</h2>
 
-<h2>Login Form</h2>
-
-<form id="loginForm">
-    <label>Username:</label><br>
-    <input type="text" id="username">
-    <div id="usernameError" class="error"></div><br>
-
-    <label>Password:</label><br>
-    <input type="password" id="password">
-    <div id="passwordError" class="error"></div><br>
-
-    <button type="submit">Login</button>
-</form>
-
-<div id="successMessage" class="success"></div>
-
-<script>
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent form submission
-
-    let username = document.getElementById("username").value.trim();
-    let password = document.getElementById("password").value;
-
-    // Clear previous messages
-    document.getElementById("usernameError").innerHTML = "";
-    document.getElementById("passwordError").innerHTML = "";
-    document.getElementById("successMessage").innerHTML = "";
-
-    let isValid = true;
-
-    // Username validation
-    if (username.length < 3) {
-        document.getElementById("usernameError").innerHTML = "Username must be at least 3 characters.";
-        isValid = false;
-    }
-
-    // Password validation
-    if (password.length < 6) {
-        document.getElementById("passwordError").innerHTML = "Password must be at least 6 characters.";
-        isValid = false;
-    }
-
-    // Success
-    if (isValid) {
-        document.getElementById("successMessage").innerHTML = "Login Successful!";
-    }
-});
-</script>
+    <form name="myForm" onsubmit="return validateForm()">
+        Name: <input type="text" name="name"><br><br>
+        Password: <input type="password" name="password"><br><br>
+        <input type="submit" value="Submit">
+    </form>
 
 </body>
 </html>
